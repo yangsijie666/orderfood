@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 注意这里的命名空间一定要与dao层的接口路径一致 -->
+<mapper namespace="xyz.diaodeyipi.orderfood.dao.OrderDao">
+    <!-- 这里的id名一定与dao层接口的方法名一致 -->
+    <select id="selectAll" resultType="xyz.diaodeyipi.orderfood.entity.Order">
+        SELECT * FROM t_order
+    </select>
+
+    <select id="selectOne" parameterType="java.lang.Integer" resultType="xyz.diaodeyipi.orderfood.entity.Order">
+        SELECT * FROM t_order WHERE deskid=#{deskId}
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultType="xyz.diaodeyipi.orderfood.entity.Order">
+        SELECT * FROM t_order WHERE id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="xyz.diaodeyipi.orderfood.entity.Order" useGeneratedKeys="true">
+        INSERT INTO t_order(deskid, totalprice) VALUES (#{deskId}, #{totalPrice})
+    </insert>
+
+    <update id="update" parameterType="xyz.diaodeyipi.orderfood.entity.Order">
+        UPDATE t_order SET totalprice=#{totalPrice} WHERE deskid=#{deskId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM t_order WHERE deskid=#{deskId}
+    </delete>
+</mapper>
